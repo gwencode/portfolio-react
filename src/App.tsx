@@ -1,15 +1,27 @@
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
-import Home from './Components/Home';
 import './App.css';
+import { css } from '@emotion/react';
+import Home from './Components/Home';
+import Navbar from './Components/Navbar';
 
 function App() {
   const [count, setCount] = useState(0);
 
+  const containerCss = {
+    maxWidth: '1280px',
+    margin: '64px auto 0',
+    padding: '2rem',
+    textAlign: 'center'
+  };
+
   return (
     <>
-      <Home />
+      <Navbar />
+      <div css={containerCss}>
+        <Home />
+      </div>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />

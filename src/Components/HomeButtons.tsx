@@ -21,7 +21,6 @@ export default function HomeButtons() {
     border: '0',
     cursor: 'pointer',
     userSelect: 'none',
-    WebkitUserSelect: 'none',
     touchAction: 'manipulation',
     ':hover': {
       backgroundImage: 'linear-gradient(-180deg, #1D95C9 0%, #17759C 100%)',

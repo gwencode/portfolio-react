@@ -4,7 +4,7 @@ import HomeTitles from './HomeTitles';
 import HomeButtons from './HomeButtons';
 
 export default function Home() {
-  const containerCss = css({
+  const homeCss = css({
     textAlign: 'center',
     margin: '0 auto',
     '@media (min-width: 768px)': {
@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <>
-      <div css={containerCss}>
+      <div css={homeCss}>
         <HomeAvatar />
         <HomeTitles />
         <HomeButtons />
