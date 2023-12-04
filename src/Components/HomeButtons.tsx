@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { Link } from 'react-router-dom';
 
 export default function HomeButtons() {
   const buttonsCss = css({
@@ -33,9 +34,9 @@ export default function HomeButtons() {
 
   return (
     <div css={buttonsCss}>
-      <a href="#contact" css={buttonCss}>
+      <Link to="/contact" css={buttonCss}>
         Contact me
-      </a>
+      </Link>
       <a href="#resume" css={buttonCss}>
         Resume
       </a>
