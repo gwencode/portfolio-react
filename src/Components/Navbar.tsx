@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const navbarCss = css({
@@ -33,18 +34,18 @@ export default function Navbar() {
 
   return (
     <nav css={navbarCss}>
-      <a href="#home" css={navLinkCss}>
+      <Link to="/" css={navLinkCss}>
         Home
-      </a>
-      <a href="#about" css={navLinkCss}>
+      </Link>
+      <Link to="/about" css={navLinkCss}>
         About
-      </a>
-      <a href="#projects" css={navLinkCss}>
+      </Link>
+      <Link to="/projects" css={navLinkCss}>
         Projects
-      </a>
-      <a href="#contact" css={navLinkCss}>
+      </Link>
+      <Link to="/contact" css={navLinkCss}>
         Contact
-      </a>
+      </Link>
     </nav>
   );
 }
