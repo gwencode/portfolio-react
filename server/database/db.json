@@ -1,0 +1,22 @@
+{
+  "projects" : [
+    {
+      "id": 1,
+      "title" : "Lestang Residence",
+      "content": "A responsive Web-App to rent an accomodation near Toulouse (France). You can either rent the whole house or a bedromm in the house. There is a full administrator interface too.",
+      "category": "Full Stack",
+      "stack": "Rails, Ruby, PostgreSQL, HTML, CSS, JavaScript, Stimulus, Stripe",
+      "live_site": "https://www.residence-lestang.com/",
+      "github": "https://github.com/gwencode/Lestang-rooms"
+    },
+    {
+      "id": 2,
+      "title" : "Vue3 Pokedex",
+      "content": "A Pokedex using Vue3, PokéAPI, Vite, Vue Router, Pinia, Vuetify. Goal: implement concept learned in the FrontendMasters' worshop to learn Vue 3 Fundamentals",
+      "category": "Full Stack",
+      "stack": "Vue.js, PokéAPI, Vite, Vue Router, Pinia, Vuetify",
+      "live_site": "https://pokedex-vue3.netlify.app/",
+      "github": "https://github.com/gwencode/vue3-pokedex"
+    }
+  ]
+}
