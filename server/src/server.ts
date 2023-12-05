@@ -1,5 +1,6 @@
 import express from "express";
 import fs from "fs/promises";
+import "reflect-metadata";
 
 const app = express();
 
@@ -19,8 +20,8 @@ app.get("/projects", async (req, res) => {
     res.json(projects);
   } catch (error) {
     console.error("Error while getting projects from db.json", error);
-    res.status(500).json({ message: "Internal Server Error"});
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
-app.listen(5000, () => console.log("Listening on http://localhost:5000"));
+export default app;
