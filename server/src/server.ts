@@ -1,27 +1,25 @@
 import express from "express";
-import fs from "fs/promises";
+import router from "./router";
 import "reflect-metadata";
+import { AppDataSource } from "./data-source";
+// import { User } from "./entity/User";
+// import { Project } from "./entity/Project";
+// import { ProjectImage } from "./entity/ProjectImage";
 
+// establish database connection
+AppDataSource.initialize()
+  .then(() => {
+    console.log("Data Source has been initialized!");
+  })
+  .catch((err) => {
+    console.error("Error during Data Source initialization:", err);
+  });
+
+// create and setup express app
 const app = express();
+app.use(express.json());
 
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello from server!" });
-});
-
-app.get("/projects", async (req, res) => {
-  try {
-    // Get json file in folder database/db.json
-    const jsonData = await fs.readFile("./database/db.json", "utf-8");
-    // Parse json file
-    const data = JSON.parse(jsonData);
-    // Extract "projects" from json file
-    const projects = data.projects;
-    // Send projects to client
-    res.json(projects);
-  } catch (error) {
-    console.error("Error while getting projects from db.json", error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-});
+// api routes
+app.use("/api", router);
 
 export default app;

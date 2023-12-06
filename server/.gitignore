@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Typeorm
+build/
+tmp/
+temp/
+database/db.sqlite
