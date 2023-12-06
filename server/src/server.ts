@@ -2,9 +2,6 @@ import express from "express";
 import router from "./router";
 import "reflect-metadata";
 import { AppDataSource } from "./data-source";
-// import { User } from "./entity/User";
-// import { Project } from "./entity/Project";
-// import { ProjectImage } from "./entity/ProjectImage";
 
 // establish database connection
 AppDataSource.initialize()
