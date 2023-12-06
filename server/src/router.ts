@@ -1,46 +1,38 @@
-import { Router, Request, Response } from "express";
-import { AppDataSource } from "./data-source";
-import { User } from "./entity/User";
-import { Project } from "./entity/Project";
-import { ProjectImage } from "./entity/ProjectImage";
+import { Router } from "express";
+import {
+  allProjects,
+  findProject,
+  createProject,
+  updateProject,
+  deleteProject,
+} from "./handlers/project";
+import {
+  allUsers,
+  findUser,
+  createUser,
+  updateUser,
+  deleteUser,
+} from "./handlers/user";
+
+import { ProjectImage } from "./entities/ProjectImage";
 
 const router = Router();
 
 // Get repositories
-const userRepository = AppDataSource.getRepository(User);
-const projectRepository = AppDataSource.getRepository(Project);
-const projectImageRepository = AppDataSource.getRepository(ProjectImage);
+// const projectImageRepository = AppDataSource.getRepository(ProjectImage);
 
-// register routes
+// Project routes
+router.get("/projects", allProjects);
+router.get("/projects/:id", findProject);
+router.post("/projects", createProject);
+router.put("/projects/:id", updateProject);
+router.delete("/projects/:id", deleteProject);
 
-router.get("/projects", async (req: Request, res: Response) => {
-  try {
-    const projects = await projectRepository.find();
-    res.json(projects);
-  } catch (error) {
-    console.error("Error while getting projects from database", error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-});
-
-router.get("/users", async (req: Request, res: Response) => {
-  try {
-    const users = await userRepository.find();
-    res.json(users);
-  } catch (error) {
-    console.error("Error while getting users from database", error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-});
-
-router.post("/users", async (req: Request, res: Response) => {
-  try {
-    const user = await userRepository.save(req.body);
-    res.json(user);
-  } catch (error) {
-    console.error("Error while saving new user into database", error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-});
+// User routes
+router.get("/users", allUsers);
+router.get("/users/:id", findUser);
+router.post("/users", createUser);
+router.put("/users/:id", updateUser);
+router.delete("/users/:id", deleteUser);
 
 export default router;

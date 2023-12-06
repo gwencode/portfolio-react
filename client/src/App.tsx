@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
@@ -10,18 +10,8 @@ import About from './Components/About';
 import Projects from './Components/Projects';
 import Contact from './Components/Contact';
 
-import BackendData from './Types/backendData';
-
 function App() {
   const [count, setCount] = useState(0);
-
-  const [backendData, setBackendData] = useState({} as BackendData);
-
-  useEffect(() => {
-    fetch('http://localhost:5000/api')
-      .then((res) => res.json())
-      .then((data) => setBackendData(data));
-  }, []);
 
   const containerCss = {
     maxWidth: '1280px',
@@ -29,8 +19,6 @@ function App() {
     padding: '2rem',
     textAlign: 'center'
   };
-
-  const message = backendData.message || 'Loading...';
 
   return (
     <>
@@ -54,7 +42,7 @@ function App() {
         </a>
       </div>
 
-      <h1>{message}</h1>
+      <h1>React & Vite</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
