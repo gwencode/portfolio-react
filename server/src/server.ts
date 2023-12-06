@@ -19,6 +19,11 @@ AppDataSource.initialize()
 const app = express();
 app.use(express.json());
 
+// Get repositories
+const userRepository = AppDataSource.getRepository(User);
+const projectRepository = AppDataSource.getRepository(Project);
+const projectImageRepository = AppDataSource.getRepository(ProjectImage);
+
 // register routes
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
@@ -26,7 +31,7 @@ app.get("/api", (req, res) => {
 
 app.get("/projects", async (req: Request, res: Response) => {
   try {
-    const projects = await AppDataSource.getRepository(Project).find();
+    const projects = await projectRepository.find();
     res.json(projects);
   } catch (error) {
     console.error("Error while getting projects from database", error);
@@ -36,7 +41,7 @@ app.get("/projects", async (req: Request, res: Response) => {
 
 app.get("/users", async (req: Request, res: Response) => {
   try {
-    const users = await AppDataSource.getRepository(User).find();
+    const users = await userRepository.find();
     res.json(users);
   } catch (error) {
     console.error("Error while getting users from database", error);
@@ -46,7 +51,7 @@ app.get("/users", async (req: Request, res: Response) => {
 
 app.post("/users", async (req: Request, res: Response) => {
   try {
-    const user = await AppDataSource.getRepository(User).save(req.body);
+    const user = await userRepository.save(req.body);
     res.json(user);
   } catch (error) {
     console.error("Error while saving new user into database", error);
