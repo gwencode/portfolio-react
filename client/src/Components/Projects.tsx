@@ -1,9 +1,13 @@
-// import { css } from '@emotion/react';
+import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
-// import Project from '../Types/project';
 import { Project } from '../../../server/src/entities/Project';
 
 export default function Projects() {
+  const projectsCss = css({
+    textAlign: 'center',
+    margin: '0 auto'
+  });
+
   const [projects, setProjects] = useState([] as Project[]);
 
   useEffect(() => {
@@ -23,8 +27,10 @@ export default function Projects() {
 
   return (
     <>
-      <h1>Projects</h1>
-      {projectsDiv}
+      <div css={projectsCss}>
+        <h2>Projects</h2>
+        {projectsDiv}
+      </div>
     </>
   );
 }

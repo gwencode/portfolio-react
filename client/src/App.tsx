@@ -14,10 +14,12 @@ function App() {
   const [count, setCount] = useState(0);
 
   const containerCss = {
-    maxWidth: '1280px',
-    margin: '64px auto 0',
-    padding: '2rem',
-    textAlign: 'center'
+    margin: '0 auto',
+    padding: '5rem 2rem 2rem',
+    textAlign: 'center',
+    '@media (min-width: 768px)': {
+      width: '75%'
+    }
   };
 
   return (

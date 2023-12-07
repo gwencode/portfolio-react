@@ -6,19 +6,14 @@ import HomeButtons from './HomeButtons';
 export default function Home() {
   const homeCss = css({
     textAlign: 'center',
-    margin: '0 auto',
-    '@media (min-width: 768px)': {
-      width: '50%'
-    }
+    margin: '0 auto'
   });
 
   return (
-    <>
-      <div css={homeCss}>
-        <HomeAvatar />
-        <HomeTitles />
-        <HomeButtons />
-      </div>
+    <div css={homeCss}>
+      <HomeAvatar />
+      <HomeTitles />
+      <HomeButtons />
       <p>Hello, I'm Gwendal, and I'm a Freelance Fullstack Developer.</p>
       <p>
         After having completed the web development course of Le Wagon in
@@ -33,6 +28,6 @@ export default function Home() {
         industry.
       </p>
       <p>Feel free to contact me to speak about your projects !</p>
-    </>
+    </div>
   );
 }

@@ -1,7 +1,8 @@
 import express from "express";
-import router from "./router";
+import { protectRouter, notProtectRouter } from "./router";
 import "reflect-metadata";
 import { AppDataSource } from "./data-source";
+import { protect } from "./middlewares/auth";
 
 // establish database connection
 AppDataSource.initialize()
@@ -17,6 +18,7 @@ const app = express();
 app.use(express.json());
 
 // api routes
-app.use("/api", router);
+app.use("/api", notProtectRouter);
+app.use("/api", protect, protectRouter);
 
 export default app;

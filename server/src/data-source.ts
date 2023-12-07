@@ -6,7 +6,7 @@ import { ProjectImage } from "./entities/ProjectImage";
 
 export const AppDataSource = new DataSource({
   type: "sqlite",
-  database: "../database/db.sqlite",
+  database: "database/db.sqlite",
 
   // Common data source options
   synchronize: true,
