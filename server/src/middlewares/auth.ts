@@ -53,9 +53,8 @@ export const protect = async (req, res, next) => {
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     req.user = payload;
-    console.log("payload: ", payload);
+    // console.log("payload: ", payload);
     next();
-    return;
   } catch (error) {
     console.error("Error during JWT verification: ", error);
     res.status(401);

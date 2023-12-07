@@ -14,6 +14,7 @@ import {
   deleteUser,
   signIn,
 } from "./handlers/user";
+import { validateUser } from "./handlers/user";
 
 import { ProjectImage } from "./entities/ProjectImage";
 
@@ -33,7 +34,7 @@ protectRouter.delete("/projects/:id", deleteProject);
 // User routes
 protectRouter.get("/users", allUsers);
 protectRouter.get("/users/:id", findUser);
-protectRouter.post("/users", createUser);
+protectRouter.post("/users", validateUser, createUser);
 protectRouter.put("/users/:id", updateUser);
 protectRouter.delete("/users/:id", deleteUser);
 notProtectRouter.post("/users/signin", signIn);
