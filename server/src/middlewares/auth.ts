@@ -1,9 +1,21 @@
 import jwt from "jsonwebtoken";
-// import { Request, Response, NextFunction } from "express";
+import bcrypt from "bcrypt";
+import { Request, Response, NextFunction } from "express";
 import { User } from "../entities/User";
 import { AppDataSource } from "../data-source";
 
 const userRepository = AppDataSource.getRepository(User);
+
+export const comparePasswords = async (
+  password: string,
+  hashedPassword: string
+) => {
+  return await bcrypt.compare(password, hashedPassword);
+};
+
+export const hashPassword = (password: string) => {
+  return bcrypt.hash(password, 10);
+};
 
 export const createJWT = (user: User) => {
   const token = jwt.sign(
@@ -17,8 +29,12 @@ export const createJWT = (user: User) => {
   return token;
 };
 
-// export const protect = async (req: Request, res: Response, next: NextFunction) => {
 export const protect = async (req, res, next) => {
+  // export const protect = async (
+  //   req: Request,
+  //   res: Response,
+  //   next: NextFunction
+  // ) => {
   const bearer = req.headers.authorization;
 
   if (!bearer) {

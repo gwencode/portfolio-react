@@ -12,6 +12,7 @@ import {
   createUser,
   updateUser,
   deleteUser,
+  signIn,
 } from "./handlers/user";
 
 import { ProjectImage } from "./entities/ProjectImage";
@@ -35,3 +36,4 @@ protectRouter.get("/users/:id", findUser);
 protectRouter.post("/users", createUser);
 protectRouter.put("/users/:id", updateUser);
 protectRouter.delete("/users/:id", deleteUser);
+notProtectRouter.post("/users/signin", signIn);
