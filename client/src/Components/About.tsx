@@ -1,8 +1,13 @@
-// import { css } from '@emotion/react';
+import { css } from '@emotion/react';
 
 export default function About() {
+  const aboutCss = css({
+    textAlign: 'center',
+    margin: '0 auto'
+  });
+
   return (
-    <>
+    <div css={aboutCss}>
       <h2>About Me</h2>
       <p>Hello, I'm Gwendal, and I'm a Freelance Fullstack Developer.</p>
       <p>
@@ -18,6 +23,6 @@ export default function About() {
         industry.
       </p>
       <p>Feel free to contact me to speak about your projects !</p>
-    </>
+    </div>
   );
 }
