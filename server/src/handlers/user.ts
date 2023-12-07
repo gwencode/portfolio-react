@@ -48,9 +48,9 @@ export const updateUser = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     } else {
-      user.firstName = req.body.firstName || user.firstName;
-      user.lastName = req.body.lastName || user.lastName;
-      user.age = req.body.age || user.age;
+      user.email = req.body.email || user.email;
+      user.password = req.body.password || user.password;
+      user.admin = req.body.admin || user.admin;
       await userRepository.save(user);
       res.json(user);
     }

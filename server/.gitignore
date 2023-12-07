@@ -27,4 +27,4 @@ dist-ssr
 build/
 tmp/
 temp/
-database/db.sqlite
+server/database/db.sqlite
