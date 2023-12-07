@@ -1,4 +1,14 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import app from "./server";
+
+app.listen(5000, () => {
+  console.log("Listening on http://localhost:5000");
+});
+
+// Database manipulation
+
 // import { AppDataSource } from "./data-source";
 // import { User } from "./entity/User";
 // import { Project } from "./entity/Project";
@@ -38,7 +48,3 @@ import app from "./server";
 // );
 // })
 // .catch((error) => console.log(error));
-
-app.listen(5000, () => {
-  console.log("Listening on http://localhost:5000");
-});

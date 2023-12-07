@@ -16,23 +16,22 @@ import {
 
 import { ProjectImage } from "./entities/ProjectImage";
 
-const router = Router();
+export const protectRouter = Router();
+export const notProtectRouter = Router();
 
 // Get repositories
 // const projectImageRepository = AppDataSource.getRepository(ProjectImage);
 
 // Project routes
-router.get("/projects", allProjects);
-router.get("/projects/:id", findProject);
-router.post("/projects", createProject);
-router.put("/projects/:id", updateProject);
-router.delete("/projects/:id", deleteProject);
+notProtectRouter.get("/projects", allProjects);
+notProtectRouter.get("/projects/:id", findProject);
+protectRouter.post("/projects", createProject);
+protectRouter.put("/projects/:id", updateProject);
+protectRouter.delete("/projects/:id", deleteProject);
 
 // User routes
-router.get("/users", allUsers);
-router.get("/users/:id", findUser);
-router.post("/users", createUser);
-router.put("/users/:id", updateUser);
-router.delete("/users/:id", deleteUser);
-
-export default router;
+protectRouter.get("/users", allUsers);
+protectRouter.get("/users/:id", findUser);
+protectRouter.post("/users", createUser);
+protectRouter.put("/users/:id", updateUser);
+protectRouter.delete("/users/:id", deleteUser);
