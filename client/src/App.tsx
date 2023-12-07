@@ -9,6 +9,7 @@ import Navbar from './Components/Navbar';
 import About from './Components/About';
 import Projects from './Components/Projects';
 import Contact from './Components/Contact';
+import Login from './Components/Login';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -32,6 +33,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin/login" element={<Login />} />
           </Routes>
         </div>
       </BrowserRouter>

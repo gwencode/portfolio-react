@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import Button from '@mui/material/Button';
 
 export default function About() {
   const aboutCss = css({
@@ -23,6 +24,7 @@ export default function About() {
         industry.
       </p>
       <p>Feel free to contact me to speak about your projects !</p>
+      <Button variant="contained">Contact Me</Button>
     </div>
   );
 }
