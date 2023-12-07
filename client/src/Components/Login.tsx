@@ -11,7 +11,7 @@ import PasswordIcon from '@mui/icons-material/Password';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export default function About() {
+export default function Login() {
   const loginCss = css({
     textAlign: 'center',
     margin: '0 auto'
@@ -25,6 +25,9 @@ export default function About() {
     }
   });
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -35,61 +38,95 @@ export default function About() {
     event.preventDefault();
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const data = { email: email, password: password };
+
+    fetch('http://localhost:5000/api/users/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          window.location.href = '/';
+          alert('Login successful.');
+        } else {
+          alert('Login failed.');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div css={loginCss}>
       <h2>Login</h2>
-      <Box
-        sx={{
-          width: 300,
-          margin: '32px auto',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem'
-        }}
-      >
-        <TextField
-          required
-          id="email"
-          label="Email"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <AccountCircle />
-              </InputAdornment>
-            )
+      <form onSubmit={handleSubmit}>
+        <Box
+          sx={{
+            width: 300,
+            margin: '32px auto',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem'
           }}
-          variant="standard"
-        />
-        <TextField
-          required
-          id="password"
-          label="Paswword"
-          type={showPassword ? 'text' : 'password'}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <PasswordIcon />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            )
-          }}
-          variant="standard"
-        />
-      </Box>
-      <Button variant="contained" size="large" css={greyButtonCss}>
-        Log in
-      </Button>
+        >
+          <TextField
+            required
+            id="email"
+            label="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AccountCircle />
+                </InputAdornment>
+              )
+            }}
+            variant="standard"
+          />
+          <TextField
+            required
+            id="password"
+            label="Paswword"
+            type={showPassword ? 'text' : 'password'}
+            onChange={(e) => setPassword(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PasswordIcon />
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+            variant="standard"
+          />
+        </Box>
+        <Button
+          variant="contained"
+          size="large"
+          css={greyButtonCss}
+          type="submit"
+        >
+          Log in
+        </Button>
+      </form>
     </div>
   );
 }
