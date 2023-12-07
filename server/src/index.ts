@@ -10,9 +10,9 @@ app.listen(5000, () => {
 // Database manipulation
 
 // import { AppDataSource } from "./data-source";
-// import { User } from "./entity/User";
-// import { Project } from "./entity/Project";
-// import { ProjectImage } from "./entity/ProjectImage";
+// import { User } from "./entities/User";
+// import { Project } from "./entities/Project";
+// import { ProjectImage } from "./entities/ProjectImage";
 
 // AppDataSource.initialize()
 //   .then(async () => {

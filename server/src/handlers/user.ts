@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { User } from "../entities/User";
 import { comparePasswords, createJWT, hashPassword } from "../middlewares/auth";
+import { validate } from "class-validator";
 
 const userRepository = AppDataSource.getRepository(User);
 
@@ -109,5 +110,22 @@ export const deleteUser = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Error while deleting user from database", error);
     res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+// Validate user
+
+export const validateUser = async (req, res, next) => {
+  const user = new User();
+  user.email = req.body.email;
+  user.password = req.body.password;
+  user.admin = req.body.admin;
+
+  const errors = await validate(user);
+  if (errors.length > 0) {
+    res.status(400).json(errors);
+    return;
+  } else {
+    next();
   }
 };
