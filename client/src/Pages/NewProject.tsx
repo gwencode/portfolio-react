@@ -34,7 +34,34 @@ export default function NewProject() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(title, category, content, liveSite, github, stack);
+
+    const data = {
+      title: title,
+      category: category,
+      content: content,
+      liveSite: liveSite,
+      github: github,
+      stack: stack.join(', ')
+    };
+
+    fetch('http://localhost:5000/api/projects', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          window.location.href = '/';
+          alert('Project added.');
+        } else {
+          alert('Project failed to add.');
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const Item = styled(Paper)(({ theme }) => ({
