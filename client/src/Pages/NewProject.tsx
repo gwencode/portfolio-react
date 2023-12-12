@@ -1,14 +1,20 @@
+import { useState } from 'react';
 import { css } from '@emotion/react';
+
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+
 import SelectCategory from '../Components/SelectCategory';
 import SelectStack from '../Components/SelectStack';
+import Stack from '../Types/stack';
 
 export default function NewProject() {
+  // CSS
+
   const newProjectCss = css({
     textAlign: 'center',
     margin: '0 auto'
@@ -18,8 +24,17 @@ export default function NewProject() {
     padding: '0 0 1rem 0'
   });
 
+  // State
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('Full Stack');
+  const [content, setContent] = useState('');
+  const [liveSite, setLiveSite] = useState('');
+  const [github, setGithub] = useState('');
+  const [stack, setStack] = useState([] as Stack);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(title, category, content, liveSite, github, stack);
   };
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -42,10 +57,11 @@ export default function NewProject() {
               id="title"
               label="Title"
               variant="filled"
+              onChange={(e) => setTitle(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6} lg={4}>
-            <SelectCategory />
+            <SelectCategory category={category} setCategory={setCategory} />
           </Grid>
           <Grid item xs={12} sm lg>
             <Item>Date</Item>
@@ -58,6 +74,7 @@ export default function NewProject() {
               required
               fullWidth
               variant="filled"
+              onChange={(e) => setContent(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -68,6 +85,7 @@ export default function NewProject() {
               label="Live Site"
               placeholder="https://www.example.com"
               variant="filled"
+              onChange={(e) => setLiveSite(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -78,14 +96,17 @@ export default function NewProject() {
               label="GitHub"
               placeholder="https://github.com/gwencode/Lestang-rooms"
               variant="filled"
+              onChange={(e) => setGithub(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
-            <SelectStack />
+            <SelectStack stack={stack} setStack={setStack} />
           </Grid>
         </Grid>
+        <Button variant="contained" type="submit">
+          Add project
+        </Button>
       </form>
-      <Button variant="contained">Add project</Button>
     </div>
   );
 }

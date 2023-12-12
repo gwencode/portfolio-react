@@ -1,6 +1,14 @@
 import TextField from '@mui/material/TextField';
 
-export default function SelectCategory() {
+type SelectCategoryProps = {
+  category: string;
+  setCategory: (category: string) => void;
+};
+
+export default function SelectCategory({
+  category,
+  setCategory
+}: SelectCategoryProps) {
   const categories = [
     { value: 'Full Stack', label: 'Full Stack' },
     { value: 'Front End', label: 'Front End' },
@@ -15,11 +23,12 @@ export default function SelectCategory() {
         required
         fullWidth
         label="Category"
-        defaultValue="Full Stack"
+        defaultValue={category}
         variant="filled"
         SelectProps={{
           native: true
         }}
+        onChange={(e) => setCategory(e.target.value)}
       >
         {categories.map((option) => (
           <option key={option.value} value={option.value}>

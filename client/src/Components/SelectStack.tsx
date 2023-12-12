@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -6,6 +5,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
+
+import Stack from '../Types/stack';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -48,14 +49,17 @@ const stacks = [
   'Vuetify'
 ];
 
-export default function SelectStack() {
-  const [stackName, setStackName] = useState<string[]>([]);
+type SelectStackProps = {
+  stack: Stack;
+  setStack: (stack: Stack) => void;
+};
 
-  const handleChange = (event: SelectChangeEvent<typeof stackName>) => {
+export default function SelectStack({ stack, setStack }: SelectStackProps) {
+  const handleChange = (event: SelectChangeEvent<typeof stack>) => {
     const {
       target: { value }
     } = event;
-    setStackName(
+    setStack(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
     );
@@ -69,7 +73,7 @@ export default function SelectStack() {
           labelId="stack-label"
           id="stack"
           multiple
-          value={stackName}
+          value={stack}
           onChange={handleChange}
           input={<OutlinedInput id="stack" label="Stack" />}
           renderValue={(selected) => (
