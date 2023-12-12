@@ -65,7 +65,6 @@ export const signIn = async (req: Request, res: Response) => {
         return res.status(401).json({ message: "Invalid password" });
       } else {
         const token = createJWT(user);
-        res.setHeader("Authorization", token);
         res.json({ token });
       }
     }

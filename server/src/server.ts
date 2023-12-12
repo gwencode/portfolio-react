@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { protectRouter, notProtectRouter } from "./router";
 import "reflect-metadata";
 import { AppDataSource } from "./data-source";
@@ -15,6 +16,7 @@ AppDataSource.initialize()
 
 // create and setup express app
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 // api routes

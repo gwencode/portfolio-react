@@ -52,8 +52,10 @@ export default function Login() {
     })
       .then((res) => {
         if (res.status === 200) {
+          res.json().then((json) => {
+            console.log('JSON: ', json);
+          });
           window.location.href = '/';
-          alert('Login successful.');
         } else {
           alert('Login failed.');
         }
