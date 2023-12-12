@@ -4,12 +4,13 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 import { css } from '@emotion/react';
-import Home from './Components/Home';
+import Home from './Pages/Home';
 import Navbar from './Components/Navbar';
-import About from './Components/About';
-import Projects from './Components/Projects';
-import Contact from './Components/Contact';
-import Login from './Components/Login';
+import About from './Pages/About';
+import Projects from './Pages/Projects';
+import Contact from './Pages/Contact';
+import Login from './Pages/Login';
+import NewProject from './Pages/NewProject';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -34,6 +35,7 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin/login" element={<Login />} />
+            <Route path="/admin/projects" element={<NewProject />} />
           </Routes>
         </div>
       </BrowserRouter>
