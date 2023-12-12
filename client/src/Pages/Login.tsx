@@ -93,7 +93,7 @@ export default function Login() {
           <TextField
             required
             id="password"
-            label="Paswword"
+            label="Password"
             type={showPassword ? 'text' : 'password'}
             onChange={(e) => setPassword(e.target.value)}
             InputProps={{

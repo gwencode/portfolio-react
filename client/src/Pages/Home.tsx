@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import HomeAvatar from './HomeAvatar';
-import HomeTitles from './HomeTitles';
-import HomeButtons from './HomeButtons';
+import HomeAvatar from '../Components/HomeAvatar';
+import HomeTitles from '../Components/HomeTitles';
+import HomeButtons from '../Components/HomeButtons';
 
 export default function Home() {
   const homeCss = css({
