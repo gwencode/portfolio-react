@@ -11,17 +11,23 @@ import Paper from '@mui/material/Paper';
 import SelectCategory from '../Components/SelectCategory';
 import SelectStack from '../Components/SelectStack';
 import Stack from '../Types/stack';
+import LogOutButton from '../Components/LogOutButton';
 
 export default function NewProject() {
-  // CSS
+  const token = localStorage.getItem('token');
+  console.log('Token in localStorage: ', token);
+  if (!token) {
+    window.location.href = '/';
+  }
 
+  // CSS
   const newProjectCss = css({
     textAlign: 'center',
     margin: '0 auto'
   });
 
-  const formCss = css({
-    padding: '0 0 1rem 0'
+  const submitButtonCss = css({
+    margin: '1rem 0'
   });
 
   // State
@@ -75,7 +81,7 @@ export default function NewProject() {
   return (
     <div css={newProjectCss}>
       <h2>Add a project</h2>
-      <form onSubmit={handleSubmit} css={formCss}>
+      <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} lg={4}>
             <TextField
@@ -130,10 +136,11 @@ export default function NewProject() {
             <SelectStack stack={stack} setStack={setStack} />
           </Grid>
         </Grid>
-        <Button variant="contained" type="submit">
+        <Button variant="contained" type="submit" css={submitButtonCss}>
           Add project
         </Button>
       </form>
+      <LogOutButton />
     </div>
   );
 }

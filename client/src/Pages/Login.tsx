@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
@@ -10,8 +11,10 @@ import TextField from '@mui/material/TextField';
 import PasswordIcon from '@mui/icons-material/Password';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import LogOutButton from '../Components/LogOutButton';
 
 export default function Login() {
+  // CSS
   const loginCss = css({
     textAlign: 'center',
     margin: '0 auto'
@@ -25,11 +28,15 @@ export default function Login() {
     }
   });
 
+  // Navigate
+  const navigate = useNavigate();
+
+  // State
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [showPassword, setShowPassword] = useState(false);
 
+  // Helper functions
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (
@@ -52,10 +59,19 @@ export default function Login() {
     })
       .then((res) => {
         if (res.status === 200) {
-          res.json().then((json) => {
-            console.log('JSON: ', json);
-          });
-          window.location.href = '/';
+          res
+            .json()
+            .then((json) => {
+              localStorage.setItem('token', json.token);
+              console.log(
+                'Token in localStorage: ',
+                localStorage.getItem('token')
+              );
+            })
+            .then(() => {
+              // window.location.href = '/admin/projects';
+              navigate('/admin/projects');
+            });
         } else {
           alert('Login failed.');
         }
@@ -129,6 +145,7 @@ export default function Login() {
           Log in
         </Button>
       </form>
+      <LogOutButton />
     </div>
   );
 }
