@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
@@ -10,8 +12,12 @@ import TextField from '@mui/material/TextField';
 import PasswordIcon from '@mui/icons-material/Password';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import LogOutButton from '../components/LogOutButton';
 
 export default function Login() {
+  console.log('User in localStorage: ', localStorage.getItem('user'));
+
+  // CSS
   const loginCss = css({
     textAlign: 'center',
     margin: '0 auto'
@@ -25,10 +31,16 @@ export default function Login() {
     }
   });
 
+  // Navigate
+  // const navigate = useNavigate();
+
+  // State
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [showPassword, setShowPassword] = useState(false);
+
+  // Helper functions
+  const { login } = useAuth();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -38,7 +50,7 @@ export default function Login() {
     event.preventDefault();
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data = { email: email, password: password };
@@ -52,10 +64,19 @@ export default function Login() {
     })
       .then((res) => {
         if (res.status === 200) {
-          res.json().then((json) => {
-            console.log('JSON: ', json);
-          });
-          window.location.href = '/';
+          res
+            .json()
+            .then((json) => {
+              login({
+                id: json.id,
+                email: json.email,
+                authToken: json.token
+              });
+            })
+            .then(() => {
+              window.location.href = '/admin/projects';
+              // navigate('/admin/projects');
+            });
         } else {
           alert('Login failed.');
         }
@@ -68,7 +89,7 @@ export default function Login() {
   return (
     <div css={loginCss}>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         <Box
           sx={{
             width: 300,
@@ -129,6 +150,7 @@ export default function Login() {
           Log in
         </Button>
       </form>
+      <LogOutButton />
     </div>
   );
 }

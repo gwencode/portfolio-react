@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 
-import Stack from '../Types/stack';
+import Stack from '../types/stack';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
