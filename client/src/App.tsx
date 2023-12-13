@@ -1,20 +1,18 @@
-import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
 import { css } from '@emotion/react';
-import Home from './Pages/Home';
-import Navbar from './Components/Navbar';
-import About from './Pages/About';
-import Projects from './Pages/Projects';
-import Contact from './Pages/Contact';
-import Login from './Pages/Login';
-import NewProject from './Pages/NewProject';
+import Home from './pages/Home';
+import Navbar from './components/Navbar';
+import About from './pages/About';
+import Projects from './pages/Projects';
+import Contact from './pages/Contact';
+import Login from './pages/Login';
+import NewProject from './pages/NewProject';
+
+import AuthContext from './context/AuthContext';
+import { useAuth } from './hooks/useAuth';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   const containerCss = {
     margin: '0 auto',
     padding: '5rem 2rem 2rem',
@@ -24,42 +22,28 @@ function App() {
     }
   };
 
+  const { user } = useAuth();
+  const setUser = () => {};
+
+  console.log('User in localStorage: ', localStorage.getItem('user'));
+
   return (
     <>
-      <BrowserRouter>
-        <Navbar />
-        <div css={containerCss}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/admin/login" element={<Login />} />
-            <Route path="/admin/projects" element={<NewProject />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-
-      <h1>React & Vite</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn way more
-      </p>
+      <AuthContext.Provider value={{ user, setUser }}>
+        <BrowserRouter>
+          <Navbar />
+          <div css={containerCss}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/admin/login" element={<Login />} />
+              <Route path="/admin/projects" element={<NewProject />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </AuthContext.Provider>
     </>
   );
 }

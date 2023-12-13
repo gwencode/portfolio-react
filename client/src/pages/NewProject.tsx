@@ -8,17 +8,13 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
-import SelectCategory from '../Components/SelectCategory';
-import SelectStack from '../Components/SelectStack';
-import Stack from '../Types/stack';
-import LogOutButton from '../Components/LogOutButton';
+import SelectCategory from '../components/SelectCategory';
+import SelectStack from '../components/SelectStack';
+import Stack from '../types/stack';
+import LogOutButton from '../components/LogOutButton';
 
 export default function NewProject() {
-  const token = localStorage.getItem('token');
-  console.log('Token in localStorage: ', token);
-  if (!token) {
-    window.location.href = '/';
-  }
+  console.log('User in localStorage: ', localStorage.getItem('user'));
 
   // CSS
   const newProjectCss = css({

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
@@ -11,9 +12,11 @@ import TextField from '@mui/material/TextField';
 import PasswordIcon from '@mui/icons-material/Password';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import LogOutButton from '../Components/LogOutButton';
+import LogOutButton from '../components/LogOutButton';
 
 export default function Login() {
+  console.log('User in localStorage: ', localStorage.getItem('user'));
+
   // CSS
   const loginCss = css({
     textAlign: 'center',
@@ -37,6 +40,8 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   // Helper functions
+  const { login } = useAuth();
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (
@@ -45,7 +50,7 @@ export default function Login() {
     event.preventDefault();
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data = { email: email, password: password };
@@ -62,11 +67,11 @@ export default function Login() {
           res
             .json()
             .then((json) => {
-              localStorage.setItem('token', json.token);
-              console.log(
-                'Token in localStorage: ',
-                localStorage.getItem('token')
-              );
+              login({
+                id: json.id,
+                email: json.email,
+                authToken: json.token
+              });
             })
             .then(() => {
               // window.location.href = '/admin/projects';
@@ -84,7 +89,7 @@ export default function Login() {
   return (
     <div css={loginCss}>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         <Box
           sx={{
             width: 300,
