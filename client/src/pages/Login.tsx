@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -32,7 +32,7 @@ export default function Login() {
   });
 
   // Navigate
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // State
   const [email, setEmail] = useState('');
@@ -74,8 +74,8 @@ export default function Login() {
               });
             })
             .then(() => {
-              // window.location.href = '/admin/projects';
-              navigate('/admin/projects');
+              window.location.href = '/admin/projects';
+              // navigate('/admin/projects');
             });
         } else {
           alert('Login failed.');

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 
 import Button from '@mui/material/Button';
@@ -14,8 +15,6 @@ import Stack from '../types/stack';
 import LogOutButton from '../components/LogOutButton';
 
 export default function NewProject() {
-  console.log('User in localStorage: ', localStorage.getItem('user'));
-
   // CSS
   const newProjectCss = css({
     textAlign: 'center',

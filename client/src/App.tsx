@@ -11,6 +11,7 @@ import NewProject from './pages/NewProject';
 
 import AuthContext from './context/AuthContext';
 import { useAuth } from './hooks/useAuth';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   const containerCss = {
@@ -25,7 +26,7 @@ function App() {
   const { user } = useAuth();
   const setUser = () => {};
 
-  console.log('User in localStorage: ', localStorage.getItem('user'));
+  let admin: string | null = localStorage.getItem('user');
 
   return (
     <>
@@ -39,7 +40,14 @@ function App() {
               <Route path="/projects" element={<Projects />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/admin/login" element={<Login />} />
-              <Route path="/admin/projects" element={<NewProject />} />
+              <Route
+                path="/admin/projects"
+                element={
+                  <ProtectedRoute admin={admin}>
+                    <NewProject />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </div>
         </BrowserRouter>
