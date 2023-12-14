@@ -75,6 +75,7 @@ export default function SelectStack({ stack, setStack }: SelectStackProps) {
           labelId="stack-label"
           id="stack"
           multiple
+          required
           value={stack}
           onChange={handleChange}
           input={<OutlinedInput id="stack" label="Stack" />}

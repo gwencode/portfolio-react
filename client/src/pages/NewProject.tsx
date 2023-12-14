@@ -107,7 +107,6 @@ export default function NewProject() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
               fullWidth
               id="liveSite"
               label="Live Site"

@@ -19,7 +19,7 @@ export class Project {
   stack: string;
 
   @Column()
-  liveSite: string;
+  liveSite: string | null;
 
   @Column()
   github: string;
