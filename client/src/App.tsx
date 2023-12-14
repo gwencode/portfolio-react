@@ -27,6 +27,7 @@ function App() {
   const setUser = () => {};
 
   let admin: string | null = localStorage.getItem('user');
+  // console.log('Admin in localStorage: ', admin);
 
   return (
     <>

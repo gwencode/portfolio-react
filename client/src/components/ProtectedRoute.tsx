@@ -6,8 +6,6 @@ type ProtectedRouteProps = {
 };
 
 const ProtectedRoute = ({ admin, children }: ProtectedRouteProps) => {
-  console.log('admin: ', admin);
-
   if (!admin) {
     return <Navigate to="/" replace />;
   }

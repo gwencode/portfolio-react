@@ -15,8 +15,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LogOutButton from '../components/LogOutButton';
 
 export default function Login() {
-  console.log('User in localStorage: ', localStorage.getItem('user'));
-
   // CSS
   const loginCss = css({
     textAlign: 'center',

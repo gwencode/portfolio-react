@@ -1,12 +1,17 @@
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import { Project } from '../../../server/src/entities/Project';
+import LogOutButton from '../components/LogOutButton';
 
 export default function Projects() {
   const projectsCss = css({
     textAlign: 'center',
     margin: '0 auto'
   });
+
+  const admin = localStorage.getItem('user');
 
   const [projects, setProjects] = useState([] as Project[]);
 
@@ -29,7 +34,13 @@ export default function Projects() {
     <>
       <div css={projectsCss}>
         <h2>Projects</h2>
+        {admin && (
+          <Link to="/admin/projects">
+            <button>Add Project</button>
+          </Link>
+        )}
         {projectsDiv}
+        {admin && <LogOutButton />}
       </div>
     </>
   );

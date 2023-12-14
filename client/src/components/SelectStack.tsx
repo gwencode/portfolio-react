@@ -20,6 +20,7 @@ const MenuProps = {
 };
 
 const stacks = [
+  'Action Mailer',
   'CSS',
   'EmotionCSS',
   'Express',
@@ -34,6 +35,7 @@ const stacks = [
   'Node',
   'Pinia',
   'PostgreSQL',
+  'Pundit',
   'React',
   'React Native',
   'Ruby',
