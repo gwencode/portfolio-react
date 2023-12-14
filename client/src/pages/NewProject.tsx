@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 
 import Button from '@mui/material/Button';
@@ -14,6 +14,8 @@ import SelectStack from '../components/SelectStack';
 import Stack from '../types/stack';
 import LogOutButton from '../components/LogOutButton';
 
+import { User } from '../types/user';
+
 export default function NewProject() {
   // CSS
   const newProjectCss = css({
@@ -25,6 +27,9 @@ export default function NewProject() {
     margin: '1rem 0'
   });
 
+  // Navigate
+  const navigate = useNavigate();
+
   // State
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('Full Stack');
@@ -35,6 +40,14 @@ export default function NewProject() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const admin = localStorage.getItem('user');
+
+    if (!admin) {
+      navigate('/');
+      return;
+    }
+    const adminObject: User = JSON.parse(admin);
 
     const data = {
       title: title,
@@ -48,14 +61,14 @@ export default function NewProject() {
     fetch('http://localhost:5000/api/projects', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${adminObject.authToken}`
       },
       body: JSON.stringify(data)
     })
       .then((res) => {
         if (res.status === 200) {
-          window.location.href = '/';
-          alert('Project added.');
+          navigate('/projects');
         } else {
           alert('Project failed to add.');
         }
