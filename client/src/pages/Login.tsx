@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
 
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
@@ -13,6 +12,9 @@ import PasswordIcon from '@mui/icons-material/Password';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LogOutButton from '../components/LogOutButton';
+import fetchUser from '../fetches/fetchUser';
+
+import { useAuth } from '../hooks/useAuth';
 
 export default function Login() {
   // CSS
@@ -38,8 +40,6 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   // Helper functions
-  const { login } = useAuth();
-
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (
@@ -48,40 +48,12 @@ export default function Login() {
     event.preventDefault();
   };
 
+  const { login } = useAuth();
+
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const data = { email: email, password: password };
-
-    fetch(`${import.meta.env.VITE_API_URL}/users/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          res
-            .json()
-            .then((json) => {
-              login({
-                id: json.id,
-                email: json.email,
-                authToken: json.token
-              });
-            })
-            .then(() => {
-              window.location.href = '/admin/projects';
-              // navigate('/admin/projects');
-            });
-        } else {
-          alert('Login failed.');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const loginData = { email: email, password: password };
+    fetchUser(loginData, login);
   };
 
   return (
