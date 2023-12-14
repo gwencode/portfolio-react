@@ -1,17 +1,23 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { css } from '@emotion/react';
-import Home from './pages/Home';
+
 import Navbar from './components/Navbar';
+import ProtectedRoute from './components/ProtectedRoute';
+
+// Public pages
+import Home from './pages/Home';
 import About from './pages/About';
-import Projects from './pages/Projects';
 import Contact from './pages/Contact';
+import Projects from './pages/Projects';
+
+// Admin pages
 import Login from './pages/Login';
 import NewProject from './pages/NewProject';
+import ProjectDetails from './pages/ProjectDetails';
 
 import AuthContext from './context/AuthContext';
 import { useAuth } from './hooks/useAuth';
-import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   const containerCss = {
@@ -39,6 +45,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/projects" element={<Projects />} />
+              <Route path="/projects/:id" element={<ProjectDetails />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/admin/login" element={<Login />} />
               <Route

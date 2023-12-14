@@ -53,7 +53,7 @@ export default function Login() {
 
     const data = { email: email, password: password };
 
-    fetch('http://localhost:5000/api/users/signin', {
+    fetch(`${import.meta.env.VITE_API_URL}/users/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

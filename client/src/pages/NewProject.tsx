@@ -58,7 +58,7 @@ export default function NewProject() {
       stack: stack.join(', ')
     };
 
-    fetch('http://localhost:5000/api/projects', {
+    fetch(`${import.meta.env.VITE_API_URL}/projects`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
