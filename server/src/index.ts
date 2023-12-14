@@ -4,6 +4,26 @@ import config from "./config";
 
 import app from "./server";
 
+// import dayjs from "dayjs";
+// const date1 = dayjs();
+// const date2 = dayjs().subtract(1, "months");
+// const date3 = dayjs().subtract(2, "months");
+// console.log(typeof date1);
+// console.log(date1.valueOf());
+// console.log(date2.valueOf());
+// const dates = [date3, date2, date1];
+// console.log(dates);
+// // Trier les objets Day.js du plus récent au plus ancien
+// const sortedDates = dates.sort((a, b) => b.valueOf() - a.valueOf());
+// console.log(sortedDates);
+
+// const date = dayjs("2023-09-01").format("MMMM YYYY");
+// console.log(date);
+// // Convert date in a dayjs object
+// const dateObject = dayjs(date);
+// console.log(dateObject);
+// console.log(dateObject.valueOf());
+
 app.listen(config.port, () => {
   console.log(`Listening on http://localhost:${config.port}`);
 });

@@ -6,6 +6,8 @@ type Project = {
   stack: string;
   live_site: string;
   github: string;
+  date: string;
+  order: number;
 };
 
 export default Project;

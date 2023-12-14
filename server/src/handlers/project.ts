@@ -54,6 +54,8 @@ export const updateProject = async (req: Request, res: Response) => {
       project.stack = req.body.stack || project.stack;
       project.liveSite = req.body.liveSite || project.liveSite;
       project.github = req.body.github || project.github;
+      project.date = req.body.date || project.date;
+      project.order = req.body.order || project.order;
       await projectRepository.save(project);
       res.json(project);
     }

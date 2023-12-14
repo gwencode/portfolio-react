@@ -2,20 +2,19 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 
+import dayjs, { Dayjs } from 'dayjs';
+
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
-
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 
 import SelectCategory from '../components/SelectCategory';
 import SelectStack from '../components/SelectStack';
 import Stack from '../types/stack';
 import LogOutButton from '../components/LogOutButton';
 
-import { User } from '../types/user';
 import getToken from '../helpers/getToken';
+import SelectDate from '../components/SelectDate';
 
 export default function NewProject() {
   // CSS
@@ -38,9 +37,16 @@ export default function NewProject() {
   const [liveSite, setLiveSite] = useState('');
   const [github, setGithub] = useState('');
   const [stack, setStack] = useState([] as Stack);
+  const [date, setDate] = useState<Dayjs | null>(dayjs('2023-12-14'));
+  const order = 0;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (date === null) {
+      alert('Please select a date.');
+      return;
+    }
 
     const token = getToken();
 
@@ -50,7 +56,9 @@ export default function NewProject() {
       content: content,
       liveSite: liveSite,
       github: github,
-      stack: stack.join(', ')
+      stack: stack.join(', '),
+      date: date.format('MMMM YYYY'),
+      order: order
     };
 
     fetch(`${import.meta.env.VITE_API_URL}/projects`, {
@@ -73,14 +81,6 @@ export default function NewProject() {
       });
   };
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary
-  }));
-
   return (
     <div css={newProjectCss}>
       <h2>Add a project</h2>
@@ -100,7 +100,7 @@ export default function NewProject() {
             <SelectCategory category={category} setCategory={setCategory} />
           </Grid>
           <Grid item xs={12} sm lg>
-            <Item>Date</Item>
+            <SelectDate date={date} setDate={setDate} />
           </Grid>
           <Grid item xs={12}>
             <TextField
