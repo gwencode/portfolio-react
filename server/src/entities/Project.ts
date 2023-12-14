@@ -24,6 +24,12 @@ export class Project {
   @Column()
   github: string;
 
+  @Column()
+  date: string;
+
+  @Column()
+  order: number;
+
   @OneToMany(() => ProjectImage, (image) => image.project)
   images: ProjectImage[];
 }

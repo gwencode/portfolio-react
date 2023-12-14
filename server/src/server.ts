@@ -4,6 +4,7 @@ import { protectRouter, notProtectRouter } from "./router";
 import "reflect-metadata";
 import { AppDataSource } from "./data-source";
 import { protect } from "./middlewares/auth";
+import { ProjectImage } from "./entities/ProjectImage";
 
 // establish database connection
 AppDataSource.initialize()
