@@ -3,10 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 
 import dayjs, { Dayjs } from 'dayjs';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -18,6 +14,7 @@ import Stack from '../types/stack';
 import LogOutButton from '../components/LogOutButton';
 
 import getToken from '../helpers/getToken';
+import SelectDate from '../components/SelectDate';
 
 export default function NewProject() {
   // CSS
@@ -103,15 +100,7 @@ export default function NewProject() {
             <SelectCategory category={category} setCategory={setCategory} />
           </Grid>
           <Grid item xs={12} sm lg>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={['DatePicker', 'DatePicker']}>
-                <DatePicker
-                  label="Controlled picker"
-                  value={date}
-                  onChange={(newDate) => setDate(newDate)}
-                />
-              </DemoContainer>
-            </LocalizationProvider>
+            <SelectDate date={date} setDate={setDate} />
           </Grid>
           <Grid item xs={12}>
             <TextField
