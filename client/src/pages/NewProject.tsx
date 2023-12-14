@@ -15,6 +15,7 @@ import Stack from '../types/stack';
 import LogOutButton from '../components/LogOutButton';
 
 import { User } from '../types/user';
+import getToken from '../helpers/getToken';
 
 export default function NewProject() {
   // CSS
@@ -41,13 +42,7 @@ export default function NewProject() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const admin = localStorage.getItem('user');
-
-    if (!admin) {
-      navigate('/');
-      return;
-    }
-    const adminObject: User = JSON.parse(admin);
+    const token = getToken();
 
     const data = {
       title: title,
@@ -62,7 +57,7 @@ export default function NewProject() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${adminObject.authToken}`
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify(data)
     })

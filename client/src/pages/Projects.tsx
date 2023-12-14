@@ -24,8 +24,10 @@ export default function Projects() {
   const projectsDiv = projects.map((project) => {
     return (
       <div key={project.title}>
-        <h3>{project.title}</h3>
-        <p>{project.content}</p>
+        <Link to={`/projects/${project.id}`}>
+          <h3>{project.title}</h3>
+          <p>{project.content}</p>
+        </Link>
       </div>
     );
   });
